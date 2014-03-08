@@ -1,0 +1,30 @@
+March 8, 2014
+1431
+BA2220
+
+<h4>Reading summaries</h4>
+
+I. Triggering of Pheromone Signaling Pathway
+#:pheromone binds to Ste2 (GPCR)
+#:triggers G_alpha to release G_beta and G_gamma
+#:G_beta_gamma has 3 effectors:
+#::Ste20 associates with Bem1 and localize to membrane by binding with Cdc42
+:::*Bem1: involved in establishing polarity (binds Ste5, Ste20, Cdc42, Cdc24)
+#:: Ste5 and Cdc24 which further triggers cascade leading to gene expression involved in matting response.
+#:: Far1-Cdc24 complex 
+:::*Cdc24: a GEF for Cdc42-GDP--> Cdc42-GTP
+:::*Far1: inhibits cell-cycle progression (MAPK substrate)
+
+II. Recycling mechanisms of Cdc42
+#: Fast - mediated by a guanine nucleotide dissociation inhibitor (GDI) called Rdi1
+#: Slow - endocytosis process mediated by actin patch
+
+See stats.txt file for details.
+
+<h4>Ideas for Abstraction</h4>
+Some crude ideas:
+#: Graph: take all proteins/ biofactors involved in the pathway as the node set. There exist an edge if an interaction of a specified type exists. (e.g. there is an edge from Cdc42_i to Ste20_j if Cdc42_i binds to Ste20_j) 
+#: Matrix: represent the cell surface with a mxn matrix where m is the 
+Each protein type involved will be represented by a m by 3 matrix where m is the number of proteins of that type. I.e. row r of Cdc42 matrix represents the rth Cdc42 which is located in the cell by the coordinate (Cdc42[r][0], Cdc42[r][1], Cdc42[r][2]).
+#: Colouring: Represent the cell as an RGB colour space. I.e. RGB corresponding to x,y,z so the cell will be a (255,255,255) colour space. 
+
