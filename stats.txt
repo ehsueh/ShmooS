@@ -10,10 +10,10 @@ yeast cell, coupled to about the same number of G-proteins
 
 - As measured by loss of fluorescence-resonance energy transfer (FRET) between Gα and Gβγ, the G protein is maximally active within 30 s after pheromone addition[1]
 
--diffusion constant (on membrane) of cdc42, cdc24 and bem1:
+- diffusion constant (on membrane) of cdc42, cdc24 and bem1:
 D_2 = 0.03 um^2/s (prenylated GFP) [3]
 
--11um^2/s (diffusion constant for cytosolic GFP) [3]
+- 11um^2/s (diffusion constant for cytosolic GFP) [3]
 
 - 1650  Rho GDI per cell [3]
 
