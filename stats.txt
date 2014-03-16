@@ -3,11 +3,32 @@ Some numbers that might be of interest for our stimulation:
 
 - 10,000 pheromone receptors on the surface of an unstimulated[1]
 yeast cell, coupled to about the same number of G-proteins
+
 - Cdc42 exhibits a considerable membrane diffusion rate of 0.036 μ2/s[2]
+
 - amount of Ste5 and Ste11 in the cell is estimated to be between 500 and 1000 molecules[1]
+
 - As measured by loss of fluorescence-resonance energy transfer (FRET) between Gα and Gβγ, the G protein is maximally active within 30 s after pheromone addition[1]
 
+-diffusion constant (on membrane) of cdc42, cdc24 and bem1:
+D_2 = 0.03 um^2/s (prenylated GFP) [3]
+
+-11um^2/s (diffusion constant for cytosolic GFP) [3]
+
+- 1650  Rho GDI per cell [3]
+
+- 3000 cdc42 a cell [3]
+
+- cytosolic fraction of cdc42 = 50% [3]
+
+- average cell radius for G1-arrested cells used in this study to 3.956 +/- 0.05 um (n=63) [3]
+
+- 6500 bem1 per cell [3]
+
+- 1000 cdc24 per cell [3]
 
 [1]A walk-through of the yeast mating pheromone response pathway http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3017506/
 [2]Dual Modes of Cdc42 Recycling Fine-Tune Polarized
 Morphogenesis http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805562/pdf/nihms-158668.pdf
+[3]GDI-Mediated Cell Polarization in Yeast Provides Precise
+Spatial and Temporal Control of Cdc42 Signaling (Ben Klunder et al) file:///h/u6/g4/00/g3hsuehy/BCB420/ShmoS/gdi_mediated_cell_polarization.pdf

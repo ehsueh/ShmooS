@@ -1,29 +1,76 @@
-March 8, 2014
+__TOC__
+
+==March 8, 2014==
 1431
 BA2220
+
+<h4>Project Repository</h4>
+Created project repository on GitHub.
+[https://github.com/ehsueh/ShmooS.git see link] 
 
 <h4>Reading summaries</h4>
 
 I. Triggering of Pheromone Signaling Pathway
-#:pheromone binds to Ste2 (GPCR)
-#:triggers G_alpha to release G_beta and G_gamma
-#:G_beta_gamma has 3 effectors:
-#::Ste20 associates with Bem1 and localize to membrane by binding with Cdc42
+:1.pheromone binds to Ste2 (GPCR)
+:2.triggers G_alpha to release G_beta and G_gamma
+:3.G_beta_gamma has 3 effectors:
+::a.Ste20 associates with Bem1 and localize to membrane by binding with Cdc42
 :::*Bem1: involved in establishing polarity (binds Ste5, Ste20, Cdc42, Cdc24)
-#:: Ste5 and Cdc24 which further triggers cascade leading to gene expression involved in matting response.
-#:: Far1-Cdc24 complex 
+::b. Ste5 and Cdc24 which further triggers cascade leading to gene expression involved in matting response.
+::c. Far1-Cdc24 complex 
 :::*Cdc24: a GEF for Cdc42-GDP--> Cdc42-GTP
 :::*Far1: inhibits cell-cycle progression (MAPK substrate)
 
 II. Recycling mechanisms of Cdc42
-#: Fast - mediated by a guanine nucleotide dissociation inhibitor (GDI) called Rdi1
-#: Slow - endocytosis process mediated by actin patch
+:1. Fast - mediated by a guanine nucleotide dissociation inhibitor (GDI) called Rdi1
+:2. Slow - endocytosis process mediated by actin patch
 
-See stats.txt file for details.
+See [https://github.com/ehsueh/ShmooS/blob/master/stats.txt stats.txt] file for details.
 
 <h4>Ideas for Abstraction</h4>
 Some crude ideas:
-#: Graph: take all proteins/ biofactors involved in the pathway as the node set. There exist an edge if an interaction of a specified type exists. (e.g. there is an edge from Cdc42_i to Ste20_j if Cdc42_i binds to Ste20_j) 
-#: Matrix: Each protein type involved will be represented by a m by 3 matrix where m is the number of proteins of that type. I.e. row r of Cdc42 matrix represents the rth Cdc42 which is located in the cell by the coordinate (Cdc42[r][0], Cdc42[r][1], Cdc42[r][2]).
-#: Colouring: Represent the cell as an RGB colour space. I.e. RGB corresponding to x,y,z so the cell will be a (255,255,255) colour space. 
+:1. Graph: take all proteins/ biofactors involved in the pathway as the node set. There exist an edge if an interaction of a specified type exists. (e.g. there is an edge from Cdc42_i to Ste20_j if Cdc42_i binds to Ste20_j) 
+:2. Matrix: Each protein type involved will be represented by a m by 3 matrix where m is the number of proteins of that type. I.e. row r of Cdc42 matrix represents the rth Cdc42 which is located in the cell by the coordinate (Cdc42[r][0], Cdc42[r][1], Cdc42[r][2]).
+:3. Visualization: Represent the cell as a 3-Dimension Coordinate Space like RGB colour space. I.e. RGB corresponding to x,y,z so the cell will be a (255,255,255) colour space. And if a protein is on the surface of the space, then R or G or B equals to 255.
 
+
+==March 16, 2014==
+1553
+BA2220
+
+1. Rdi1 is a Guanine nucleotide dissocation inhibitor (GDI)
+2. GTPase cdc42 mediates symmetry breaking
+3. different prots accumulate at restricted region of membrane to initiate morphogenetic downstream cellular activity at that site --> this clustering:
+:::a. can occur without presence of spatial cues 
+:::b. is in dynamic equilibrium (clusters remain stable but there is rapid exchange btwn prots in cytoplasm and those at the membrane)
+4. Two pathways identified for Cdc42 localization:
+:::1) involving targeted excocytosis of cdc42 along actin cables
+:::2) fast recycling of cdc42 by Rdi1
+5. Exactly how the two pathways interact with and affect each other are unknown.
+6. Constitutively active or inactive Cdc42 polarization can not occur without actin; GTP-bound <-> GDP-bound cycle is crucial for actin-independent polarization.
+7. "Fundamental mechanism responsible for spontaneous polarization still remain controversial."
+8. Modeling experiments in the past:
+:::1) With only one postive feedback loop:
+::::-unstable polarization
+::::-reduced polarization efficiency 
+::::-smaller stochastic effects with increasing number of particles
+:::2) Goryachev + Polkhilko's turing-type mechanism: 
+::::- proposal: GDI-mediated polarization clusters result in multiple short-lived clusters which are merged into one single cluster due to competition for limited amount of prots
+::::- wet lab experiments detected multiple transient caps in wild-types
+::::- BUT, recent study shows that formation of multipe stable clusters is due to actin and that GDI-mediated polarization counter the formation of multiple clusters
+::::(Side-note: turing mechanism = interaction bewteen inhibitors and activators resulting in complex patterns)
+:::3)This paper's approach:
+::::- deterministic reaction-diffusion dyanmics
+::::- results have been verified experimentally
+::::- gives precise spatial and temporal control of cdc42-gtp production => can accurately initiate developmental processes at specific time and place 
+::::- explicitly include concentration and distribution of Cdc42, cdc24 and bem1
+9. Positive feedback loop: how GEF Cdc24 is recruited towards Cdc42-GTP is not entirely known (controversial). Contributors include: p21-activated kinase Cla4 and Bem1.
+
+<h4> TO-DO's </h4>
+* Update Boris about progress
+* Meet with Dr. Sergio Peisajovich
+::- ask questions about the pathway
+::- are we understanding the bio side correctly?
+::- are we overlooking anything important?
+::- do the stats we collected look reasonable?
+* Talk to math profs (laplace operator model.... etc)
