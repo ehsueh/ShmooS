@@ -31,4 +31,4 @@ D_2 = 0.03 um^2/s (prenylated GFP) [3]
 [2]Dual Modes of Cdc42 Recycling Fine-Tune Polarized
 Morphogenesis http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805562/pdf/nihms-158668.pdf
 [3]GDI-Mediated Cell Polarization in Yeast Provides Precise
-Spatial and Temporal Control of Cdc42 Signaling (Ben Klunder et al) file:///h/u6/g4/00/g3hsuehy/BCB420/ShmoS/gdi_mediated_cell_polarization.pdf
+Spatial and Temporal Control of Cdc42 Signaling (Ben Klunder et al) http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1003396
