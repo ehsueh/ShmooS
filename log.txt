@@ -74,3 +74,35 @@ BA2220
 ::- are we overlooking anything important?
 ::- do the stats we collected look reasonable?
 * Talk to math profs (laplace operator model.... etc)
+
+
+==March 20, 2014==
+1700~1830 ish
+* Discussed equations used in Ben Klunder et al.'s paper "GDI-Mediated Cell Polarization in Yeast Provides Precise Spatial and Temporal Control of Cdc42 Signaling"
+* Met with Professor Arick Shao to ask questions about the math
+:- Laplacian
+:- Laplace transformation
+:- Heat equations
+
+==March 23, 2014==
+1434
+<h4> Modelling </h4>
+* Dynamic equilibrium: exchange of proteins at cluster
+:- right below cluster: lower cytosolic concentration
+:- around that, higher cystolic conc
+:- net flux from cytosol to membrane at the center of cluster
+:- opposite flux at periphery => total # of prots in cluster remains constant
+:- continuous prots redistribution to counter lateral diffusion along membrane (see mass conserved polarity models)
+* positive feedback loop
+<h4> Emergence of Polarization </h4>
+* linear stability 
+<h4> Expectations </h4>
+* "reduced values of any of the parameters (Cdc24, Bem, Cdc42...) will prevent polarization
+* increase in GEF conc --> reduce in Cdc42 hydrolysis rate
+* growth of cap = linear change in conc
+* narrowring of cap = non-linear
+<h4> Matlab script</h4>
+Questions + concerns:
+* Laplace operator: what is our concentration function? Are we missing something?
+* How to represent positive feedback loop?
+* see github shmoos.m
