@@ -39,3 +39,15 @@ function delta_cg = delta_cg(cg)
 delta_cg =
 
 %boundary conditions
+
+function bound_cd = bound_cd(cd, mbg, md)
+bound_cd = (-(att_42bc * mbg + att_42) * cd + ext_42 * md) / D_3
+
+function bound_cb = bound_cb(mt, cb, mb)
+bound_cb = (-(att_b * mt* cb) + det_b * mb) / D_3
+
+function bound_cg = bound_cg(mb, cg, mbg) 
+bound_cg = (-(att_24 * mb * cg) + det_24 * mbg) / D_3
+
+
+
