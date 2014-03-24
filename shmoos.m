@@ -30,13 +30,13 @@ function delta_bg = delta_bg(mb, cg, mbg)
 delta_bg = att_24*mb*cb - det_24 - det_24*mbg + D_2*laplacian(mbg, [R_, thet, phi], %)
 
 function delta_cg = delta_cg(cd) 
-delta_cg = D_3 * cd 
+delta_cg = D_3 * laplacian(cd, [r, thet, phi], %)
 
 function delta_cb = delta_cb(cb) 
-delta_cb = D_3 * cb 
+delta_cb = D_3 * laplacian(cb, [r, thet, phi], %)
 
 function delta_cg = delta_cg(cg) 
-delta_cg = D_3 * cg 
+delta_cg = D_3 * laplacian(cg, [r, thet, phi], %)
 
 %boundary conditions 
 function bound_cd = bound_cd(cd, mbg, md) 
