@@ -19,7 +19,6 @@ N_24 = 1000
 function delta_mt = detlta_mt(md, mt, mbg) 
 delta_mt = (mbg*nex_gef + nex_intr)*md - hyd_42*mt + att_42bc*mbg*cd + D_2*laplacian(mt, [R_, thet, phi], %)
 
-
 function delta_md = delta_md(mbg, md, mt, cd)
 delta_md = -(mbg*nex_gef + nex_intr)*md + hyd_42*mt + att_42*cd - ext_42*md + D_2*laplacian(md, [R_, thet, phi], %)
 
