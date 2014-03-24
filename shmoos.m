@@ -30,13 +30,13 @@ function delta_bg = delta_bg(mb, cg, mbg)
 delta_bg = 
 
 function delta_cg = delta_cg(cd)
-delta_cg = 
+delta_cg = D_3 * cd
 
 function delta_cb = delta_cb(cb)
-delta_cb = 
+delta_cb = D_3 * cb
 
 function delta_cg = delta_cg(cg)
-delta_cg =
+delta_cg = D_3 * cg
 
 %boundary conditions
 
