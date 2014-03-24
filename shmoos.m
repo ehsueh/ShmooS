@@ -1,3 +1,7 @@
+% Create a 3D shperical space
+linalg::ogCoordTab[Spherical[RightHanded], Transformation](r, thet, phi)
+
+% Define variables from Shooms Var File.
 D_2 = 0.03 
 D_3 = 11 
 nex_gef = 0.2 
@@ -14,6 +18,9 @@ R_ = 3.95
 N_42 = 3000
 N_B = 6500
 N_24 = 1000
+
+% Restrict the radius of shperical to be less than R_
+r <= R_
 
 
 function delta_mt = delta_mt(md, mt, mbg, thet, phi) 
