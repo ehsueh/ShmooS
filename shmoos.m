@@ -29,13 +29,22 @@ delta_mb = att_b*mt*cb - det_b*mb*cg - att_24*mb*cb + det_24*mbg + D_2*laplacian
 function delta_bg = delta_bg(mb, cg, mbg)
 delta_bg = att_24*mb*cb - det_24 - det_24*mbg + D_2*laplacian(mbg, [R_, thet, phi], %)
 
-function delta_cg = delta_cg(cd)
-delta_cg = 
+function delta_cg = delta_cg(cd) 
+delta_cg = D_3 * cd 
 
-function delta_cb = delta_cb(cb)
-delta_cb = 
+function delta_cb = delta_cb(cb) 
+delta_cb = D_3 * cb 
 
-function delta_cg = delta_cg(cg)
-delta_cg =
+function delta_cg = delta_cg(cg) 
+delta_cg = D_3 * cg 
 
-%boundary conditions
+%boundary conditions 
+function bound_cd = bound_cd(cd, mbg, md) 
+bound_cd = (-(att_42bc * mbg + att_42) * cd + ext_42 * md) / D_3 
+
+function bound_cb = bound_cb(mt, cb, mb) 
+bound_cb = (-(att_b * mt* cb) + det_b * mb) / D_3 
+
+function bound_cg = bound_cg(mb, cg, mbg) 
+bound_cg = (-(att_24 * mb * cg) + det_24 * mbg) / D_3
+
