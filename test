@@ -1,0 +1,30 @@
+membrane Cdc42-GTP		C	i_mt
+membrane Cdc42-GDP		mD	i_md
+membrane Bem1		mB	i_mb
+membrane Bem1-Cdc24		mBG	i_mbg
+Cytosolic Cdc42-GDP		cD	i_cd
+Cytosolic Bem1		cB	i_cb
+Cytosolic Cdc24		cG	i_cg
+membrane Cdc42-GTP	unknowns	deltaC	mt
+membrane Cdc42-GDP	unknowns	deltamD	md
+membrane Bem1	unknowns	deltamB	mb
+membrane Bem1-Cdc24	unknowns	deltamBG	mbg
+Cytosolic Cdc42-GDP	unknowns	deltacD	cd
+Cytosolic Bem1	unknowns	deltacB	cb
+Cytosolic Cdc24	unknowns	deltacG	cg
+diffusion constant of membrane	0.03 um2/s	D_2	D_2
+diffusion constant of cytosol	11 um2/s	D_3	D_3
+GEF dependent nucleotide exchange rate	0.2 um2/s	alpha1	nex_gef
+intrinsic nucleotide exchange rate	0.12 um2/s	alpha2	nex_intr
+hydrolysis rate of Cdc42	1 /s	alpha3	hyd_42
+attachment rate of Cdc42 with Bem1-Cdc24 complex	0.266 um3/s	beta1	att_42bc
+attachment rate of Cdc42 (without)	0.28 um/s	beta2	att_42
+extraction rate of Cdc42	1 /s	beta3	ext_42
+attachment rate fo Bem1 with Cdc42-GTP	0.2667 um3/s	gamma1	att_b
+detachment rate of Bem1	0.35 /s	gamma2	det_b
+attachment rate of Cdc24 to Bem1	0.00297 um3/s	delta1	att_24
+detachment rate of Cdc24 from Bem1 	0.35 /s	delta2	det_24
+radius of cell	3.95 um	R	R_
+number of Cdc42 per cell	3000	N_42	N_42
+number of Bem1 per cell	6500	N_B	N_B
+number of Cdc24 per cell	1000	N_24	N_24
