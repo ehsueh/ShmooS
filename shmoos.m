@@ -54,3 +54,21 @@ bound_cb = (-(att_b * mt* cb) + det_b * mb) / D_3
 function bound_cg = bound_cg(mb, cg, mbg) 
 bound_cg = (-(att_24 * mb * cg) + det_24 * mbg) / D_3
 
+
+
+% create vectors 
+thet = linspace(0, 2*pi);
+phi = linspace(-pi/2, pi/2);
+
+% create meshgrid for inputs
+[thet, phi] = meshgrid(thet, phi);
+
+% define radius
+r = thet^2 + phi;
+
+% convert to cartesian coordinate
+[x, y, z] = sph2cart(thet, phi, r);
+
+% plot
+surf(x, y, z);
+
