@@ -85,19 +85,19 @@ f_cg = @(r, t, p) mat_cg(r, t, p);
 %% delta functions: change in concentration per time unit
 
 %%% those functions needs to be adjusted
-delta_mt = @(md, mt, mbg, thet, phi)(mbg*nex_gef + nex_intr)*md - hyd_42*mt + att_42bc*mbg*cd + D_2*laplacian(f_mt, [R_, thet, phi], Spherical[RightHanded]);
+delta_mt = @(md, mt, mbg, thet, phi) (mbg*nex_gef + nex_intr)*md - hyd_42*mt + att_42bc*mbg*cd + D_2*laplacian(f_mt, [R_, thet, phi], R);
 
-delta_md = @(mbg, md, mt, cd, thet, phi) -(mbg*nex_gef + nex_intr)*md + hyd_42*mt + att_42*cd - ext_42*md + D_2*laplacian(f_md, [R_, thet, phi], Spherical[RightHanded]);
+delta_md = @(mbg, md, mt, cd, thet, phi) -(mbg*nex_gef + nex_intr)*md + hyd_42*mt + att_42*cd - ext_42*md + D_2*laplacian(f_md, [R_, thet, phi], R);
 
-delta_mb = @(mt, mb, mb, cg, thet, phi) att_b*mt*cb - det_b*mb*cg - att_24*mb*cb + det_24*mbg + D_2*laplacian(f_mb, [R_, thet, phi], Spherical[RightHanded] );
+delta_mb = @(mt, mb, cg, thet, phi) att_b*mt*cb - det_b*mb*cg - att_24*mb*cb + det_24*mbg + D_2*laplacian(f_mb, [R_, thet, phi], R);
 
-delta_bg = @(mb, cg, mbg, thet, phi) att_24*mb*cb - det_24 - det_24*mbg + D_2*laplacian(f_mbg, [R_, thet, phi], Spherical[RightHanded]);
+delta_bg = @(mb, cg, mbg, thet, phi) att_24*mb*cb - det_24 - det_24*mbg + D_2*laplacian(f_mbg, [R_, thet, phi], R);
 
-delta_cg = @(cd, r, thet, phi) D_3 * laplacian(f_cd, [r, thet, phi], Spherical[RightHanded]);
+delta_cg = @(cd, r, thet, phi) D_3 * laplacian(f_cd, [r, thet, phi], R);
 
-delta_cb = @(cb, r, thet, phi) D_3 * laplacian(f_cb, [r, thet, phi], Spherical[RightHanded]);
+delta_cb = @(cb, r, thet, phi) D_3 * laplacian(f_cb, [r, thet, phi], R);
 
-delta_cg = @(cg, r, thet, phi) D_3 * laplacian(f_cg, [r, thet, phi], Spherical[RightHanded]);
+delta_cg = @(cg, r, thet, phi) D_3 * laplacian(f_cg, [r, thet, phi], R);
 
 %% boundary conditions 
 bound_cd = @(cd, mbg, md) (-(att_42bc * mbg + att_42) * cd + ext_42 * md) / D_3 ;
@@ -123,5 +123,5 @@ r = 1
 [x, y, z] = sph2cart(thet, phi, r);
 
 % plot
-plot(x, y, z);
+surf(x, y, z);
 

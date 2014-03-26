@@ -85,19 +85,19 @@ f_cg = @(r, t, p) mat_cg(r, t, p);
 %% delta functions: change in concentration per time unit
 
 %%% those functions needs to be adjusted
-delta_mt = @(r, thet, phi)(f_mbg(r, thet, phi) * nex_gef + nex_intr) * f_md(r, thet, phi) - hyd_42 * f_mt(r, thet, phi) + att_42bc * f_mbg(r, thet, phi) * f_cd(r, thet, phi) + D_2 * laplacian(f_mt, [R_, thet, phi], Spherical[RightHanded]);
+delta_mt = @(r, thet, phi)(f_mbg(r, thet, phi) * nex_gef + nex_intr) * f_md(r, thet, phi) - hyd_42 * f_mt(r, thet, phi) + att_42bc * f_mbg(r, thet, phi) * f_cd(r, thet, phi) + D_2 * laplacian(f_mt, [R_, thet, phi], R);
 
-delta_md = @(r, thet, phi) -(f_mbg(r, thet, phi) * nex_gef + nex_intr) * f_md(r, thet, phi) + hyd_42 * f_mt(r, thet, phi) + att_42 * f_cd(r, thet, phi) - ext_42 * f_md(r, thet, phi) + D_2 * laplacian(f_md, [R_, thet, phi], Spherical[RightHanded]);
+delta_md = @(r, thet, phi) -(f_mbg(r, thet, phi) * nex_gef + nex_intr) * f_md(r, thet, phi) + hyd_42 * f_mt(r, thet, phi) + att_42 * f_cd(r, thet, phi) - ext_42 * f_md(r, thet, phi) + D_2 * laplacian(f_md, [R_, thet, phi], R);
 
-delta_mb = @(r, thet, phi) att_b * f_mt(r, thet, phi) * f_cb(r, thet, phi) - det_b * f_mb(r, thet, phi) * f_cg(r, thet, phi) - att_24 * f_mb(r, thet, phi) * f_cb(r, thet, phi) + det_24 * f_mbg(r, thet, phi) + D_2 * laplacian(f_mb, [R_, thet, phi], Spherical[RightHanded] );
+delta_mb = @(r, thet, phi) att_b * f_mt(r, thet, phi) * f_cb(r, thet, phi) - det_b * f_mb(r, thet, phi) * f_cg(r, thet, phi) - att_24 * f_mb(r, thet, phi) * f_cb(r, thet, phi) + det_24 * f_mbg(r, thet, phi) + D_2 * laplacian(f_mb, [R_, thet, phi], R);
 
-delta_bg = @(r, thet, phi) att_24 * f_mb(r, thet, phi) * f_cb(r, thet, phi) - det_24 - det_24 * f_mbg(r, thet, phi) + D_2 * laplacian(f_mbg, [R_, thet, phi], Spherical[RightHanded]);
+delta_bg = @(r, thet, phi) att_24 * f_mb(r, thet, phi) * f_cb(r, thet, phi) - det_24 - det_24 * f_mbg(r, thet, phi) + D_2 * laplacian(f_mbg, [R_, thet, phi], R);
 
-delta_cg = @(r, thet, phi) D_3 * laplacian(f_cd, [r, thet, phi], Spherical[RightHanded]);
+delta_cg = @(r, thet, phi) D_3 * laplacian(f_cd, [r, thet, phi], R);
 
-delta_cb = @(r, thet, phi) D_3 * laplacian(f_cb, [r, thet, phi], Spherical[RightHanded]);
+delta_cb = @(r, thet, phi) D_3 * laplacian(f_cb, [r, thet, phi], R);
 
-delta_cg = @(r, thet, phi) D_3 * laplacian(f_cg, [r, thet, phi], Spherical[RightHanded]);
+delta_cg = @(r, thet, phi) D_3 * laplacian(f_cg, [r, thet, phi], R);
 
 %% boundary conditions 
 bound_cd = @(cd, mbg, md) (-(att_42bc * mbg + att_42) * cd + ext_42 * md) / D_3 ;
@@ -109,12 +109,12 @@ bound_cg = @(mb, cg, mbg) (-(att_24 * mb * cg) + det_24 * mbg) / D_3;
 %% update functions
 
 
-%% now start to run for time perid t
-for tstep = 0 : t - 1
-    
-    % creat an update materix and added to the existing one at the end of
-    % interval
-    mat_delta_mt = zeros(nr, nthet, nphi) + delta_mt(md, mt, mbg, thet, phi)
+% %% now start to run for time perid t
+% for tstep = 0 : t - 1
+%     
+%     % creat an update materix and added to the existing one at the end of
+%     % interval
+%     mat_delta_mt = zeros(nr, nthet, nphi) + delta_mt(md, mt, mbg, thet, phi)
     
 
 % create vectors 
@@ -131,5 +131,5 @@ r = 1
 [x, y, z] = sph2cart(thet, phi, r);
 
 % plot
-plot(x, y, z);
+surf(x, y, z);
 
