@@ -14,7 +14,7 @@ i_cg = 1;
 
 %% time interval definition: 1 is the unit of each time step
 % t - total time steps
-t = 100;
+time = 1;
 
 %% display time interval
 display_t = 1;
@@ -44,7 +44,7 @@ N_24 = 1000;
 % i_r - inital value, R_ - max radius, r - interval, nr - number of r points
 i_r = 0;
 R_ = 3.95 ;
-r_int = 0.1;
+r_int = 0.01;
 nr = (R_ - i_r) / r_int + 1;
 
 % theta variables:
@@ -61,43 +61,69 @@ nphi = (PHI_ - i_phi) / phi_int + 1;
 
 %% matrix definition and inquiry functions
 % define matrices and functions for mt, bd, mb, mbg, cd, cb, cg
-mat_mt = ones(nr, nthet, nphi) * i_mt;
-f_mt = @(r, t, p) mat_mt(r, t, p);
+syms r t p;
 
-mat_md = ones(nr, nthet, nphi) * i_md;
-f_md = @(r, t, p) mat_md(r, t, p);
+% initial materix to get the functions
+mat_mt = rand(nthet, nphi) * i_mt;
+% f_mt = @(t, p) mat_mt((t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
+f_mt = t + p;
+f_md = @(t, p) t + p;
+f_mb = @(t, p) t + p;
+f_mbg = @(t, p) t + p;
+f_cd = @(r, t, p) t + p;
+f_cb = @(r, t, p) t + p;
+f_cg = @(r, t, p) t + p;
+mat_md = rand(nthet, nphi) * i_md;
+% f_md = @(t, p) mat_md((t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
 
-mat_mb = ones(nr, nthet, nphi) * i_mb;
-f_mb = @(r, t, p) mat_mb(r, t, p);
+mat_mb = ones(nthet, nphi) * i_mb;
+% f_mb = @(t, p) mat_mb((t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
 
-mat_mbg = ones(nr, nthet, nphi) * i_mbg;
-f_mbg = @(r, t, p) mat_mbg(r, t, p);
+mat_mbg = ones(nthet, nphi) * i_mbg;
+% f_mbg = @(t, p) mat_mbg((t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
 
 mat_cd = ones(nr, nthet, nphi) * i_cd;
-f_cd = @(r, t, p) mat_cd(r, t, p);
+% f_cd = @(r, t, p) mat_cd((r - i_r) / r_int + 1, (t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
 
 mat_cb = ones(nr, nthet, nphi) * i_cb;
-f_cb = @(r, t, p) mat_cb(r, t, p);
+% f_cb = @(r, t, p) mat_cb((r - i_r) / r_int + 1, (t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
 
 mat_cg = ones(nr, nthet, nphi) * i_cg;
-f_cg = @(r, t, p) mat_cg(r, t, p);
+% f_cg = @(r, t, p) mat_cg((r - i_r) / r_int + 1, (t - i_thet) / thet_int + 1, (p - i_phi) / phi_int + 1);
+
+%% define the spherical laplacian
+
+% spherical laplacian               
+
+% spherical laplacian 
+
+laplacian = @(f, r, t, p) 1/r^2 * diff((r^2 * diff(f, r)), r) + 1/r^2/sin(t) * diff(sin(t) * diff(f, t), t) + 1/r^2/sin(t)^2 * diff(f, p, 2);
+laplacian2 = @(f, r, t, p) 1/r^2/sin(t) * diff(sin(t) * diff(f, t), t) + 1/r^2/sin(t)^2 * diff(f, p, 2);
 
 %% delta functions: change in concentration per time unit
 
 %%% those functions needs to be adjusted
-delta_mt = @(md, mt, mbg, thet, phi) (mbg*nex_gef + nex_intr)*md - hyd_42*mt + att_42bc*mbg*cd + D_2*laplacian(f_mt, [R_, thet, phi], R);
+% delta_mt = @(r, t, p)(f_mbg(r, t, p) * nex_gef + nex_intr) * f_md(r, t, p) - hyd_42 * f_mt(r, t, p) + att_42bc * f_mbg(r, t, p) * f_cd(r, t, p) + D_2 * laplacian2(f_mt, R_, t, p);
+% 
+% delta_md = @(r, t, p) -(f_mbg(r, t, p) * nex_gef + nex_intr) * f_md(r, t, p) + hyd_42 * f_mt(r, t, p) + att_42 * f_cd(r, t, p) - ext_42 * f_md(r, t, p) + D_2 * laplacian2(f_md, R_, t, p);
+% 
+% delta_mb = @(r, t, p) att_b * f_mt(r, t, p) * f_cb(r, t, p) - det_b * f_mb(r, t, p) * f_cg(r, t, p) - att_24 * f_mb(r, t, p) * f_cb(r, t, p) + det_24 * f_mbg(r, t, p) + D_2 * laplacian2(f_mb, R_, t, p);
+% 
+% delta_bg = @(r, t, p) att_24 * f_mb(r, t, p) * f_cb(r, t, p) - det_24 - det_24 * f_mbg(r, t, p) + D_2 * laplacian2(f_mbg, R_, t, p);
 
-delta_md = @(mbg, md, mt, cd, thet, phi) -(mbg*nex_gef + nex_intr)*md + hyd_42*mt + att_42*cd - ext_42*md + D_2*laplacian(f_md, [R_, thet, phi], R);
+delta_mt = @(t, p)(f_mbg(t, p) * nex_gef + nex_intr) * f_md(t, p) - hyd_42 * f_mt(t, p) + att_42bc * f_mbg(t, p) * f_cd(R_, t, p) + D_2 * laplacian2(f_mt, R_, t, p);
 
-delta_mb = @(mt, mb, cg, thet, phi) att_b*mt*cb - det_b*mb*cg - att_24*mb*cb + det_24*mbg + D_2*laplacian(f_mb, [R_, thet, phi], R);
+delta_md = @(t, p) -(f_mbg(t, p) * nex_gef + nex_intr) * f_md(t, p) + hyd_42 * f_mt(t, p) + att_42 * f_cd(R_, t, p) - ext_42 * f_md(t, p) + D_2 * laplacian2(f_md, R_, t, p);
 
-delta_bg = @(mb, cg, mbg, thet, phi) att_24*mb*cb - det_24 - det_24*mbg + D_2*laplacian(f_mbg, [R_, thet, phi], R);
+delta_mb = @(t, p) att_b * f_mt(t, p) * f_cb(R_, t, p) - det_b * f_mb(t, p) * f_cg(R_, t, p) - att_24 * f_mb(t, p) * f_cb(R_, t, p) + det_24 * f_mbg(t, p) + D_2 * laplacian2(f_mb, R_, t, p);
 
-delta_cg = @(cd, r, thet, phi) D_3 * laplacian(f_cd, [r, thet, phi], R);
+delta_mbg = @(t, p) att_24 * f_mb(t, p) * f_cb(R_, t, p) - det_24 - det_24 * f_mbg(t, p) + D_2 * laplacian2(f_mbg, R_, t, p);
 
-delta_cb = @(cb, r, thet, phi) D_3 * laplacian(f_cb, [r, thet, phi], R);
+delta_cd = @(r, t, p) D_3 * laplacian(f_cd, r, t, p);
 
-delta_cg = @(cg, r, thet, phi) D_3 * laplacian(f_cg, [r, thet, phi], R);
+delta_cb = @(r, t, p) D_3 * laplacian(f_cb, r, t, p);
+
+delta_cg = @(r, t, p) D_3 * laplacian(f_cg, r, t, p);
 
 %% boundary conditions 
 bound_cd = @(cd, mbg, md) (-(att_42bc * mbg + att_42) * cd + ext_42 * md) / D_3 ;
@@ -107,21 +133,71 @@ bound_cb = @(mt, cb, mb) (-(att_b * mt* cb) + det_b * mb) / D_3;
 bound_cg = @(mb, cg, mbg) (-(att_24 * mb * cg) + det_24 * mbg) / D_3;
 
 %% update functions
-   
 
-% create vectors 
-thet = linspace(0, 2*pi);
-phi = linspace(-pi/2, pi/2);
 
-% create meshgrid for inputs
-[thet, phi] = meshgrid(thet, phi);
+%% now start to run for time perid t
+for tstep = 0 : time - 1
+    
+    % plot if it is at the right interval
+%     if not mod(tstep, t_interval)
+%     end 
+    
+    % creat an update materix and added to the existing one at the end of
+    % interval
+    % inital the delta matrices
+%     mat_delta_mt = zeros(nr, nthet, nphi);
+%     mat_delta_md = zeros(nr, nthet, nphi);
+%     mat_delta_mb = zeros(nr, nthet, nphi);
+%     mat_delta_mbg = zeros(nr, nthet, nphi);
+%     mat_delta_cd = zeros(nr, nthet, nphi);
+%     mat_delta_cb = zeros(nr, nthet, nphi);
+%     mat_delta_cg = zeros(nr, nthet, nphi);
+  
+    % at 0 step, delta 1 and function are already there. 
+    % calculate the function1
+%     f_mt = @(r, t, p) delta_mt(R_, t, p) + f_mt(R_, t, p);
+%     f_md = @(r, t, p) delta_md(R_, t, p) + f_md(R_, t, p);
+%     f_mb = @(r, t, p) delta_mb(R_, t, p) + f_mb(R_, t, p);
+%     f_mbg = @(r, t, p) delta_mbg(R_, t, p) + f_mbg(R_, t, p);
+    f_mt = @(t, p) delta_mt(t, p) + f_mt(t, p);
+    f_md = @(t, p) delta_md(t, p) + f_md(t, p);
+    f_mb = @(t, p) delta_mb(t, p) + f_mb(t, p);
+    f_mbg = @(t, p) delta_mbg(t, p) + f_mbg(t, p);
+    f_cd = @(r, t, p) delta_cd(r, t, p) + f_cd(r, t, p);
+    f_cb = @(r, t, p) delta_cb(r, t, p) + f_cb(r, t, p);
+    f_cg = @(r, t, p) delta_cg(r, t, p) + f_cg(r, t, p);
+    
+    delta_mt = @(t, p)(f_mbg(t, p) * nex_gef + nex_intr) * f_md(t, p) - hyd_42 * f_mt(t, p) + att_42bc * f_mbg(t, p) * f_cd(R_, t, p) + D_2 * laplacian2(f_mt, R_, t, p);
 
-% define radius
-r = 1
+    delta_md = @(t, p) -(f_mbg(t, p) * nex_gef + nex_intr) * f_md(t, p) + hyd_42 * f_mt(t, p) + att_42 * f_cd(R_, t, p) - ext_42 * f_md(t, p) + D_2 * laplacian2(f_md, R_, t, p);
 
-% convert to cartesian coordinate
-[x, y, z] = sph2cart(thet, phi, r);
+    delta_mb = @(t, p) att_b * f_mt(t, p) * f_cb(R_, t, p) - det_b * f_mb(t, p) * f_cg(R_, t, p) - att_24 * f_mb(t, p) * f_cb(R_, t, p) + det_24 * f_mbg(t, p) + D_2 * laplacian2(f_mb, R_, t, p);
 
-% plot
-surf(x, y, z);
+    delta_mbg = @(t, p) att_24 * f_mb(t, p) * f_cb(R_, t, p) - det_24 - det_24 * f_mbg(t, p) + D_2 * laplacian2(f_mbg, R_, t, p);
+
+    delta_cd = @(r, t, p) D_3 * laplacian(f_cd, r, t, p);
+
+    delta_cb = @(r, t, p) D_3 * laplacian(f_cb, r, t, p);
+
+    delta_cg = @(r, t, p) D_3 * laplacian(f_cg, r, t, p);
+
+end
+
+f_mt(0, 0);
+
+% % create vectors 
+% thet = linspace(0, 2*pi);
+% phi = linspace(-pi/2, pi/2);
+% 
+% % create meshgrid for inputs
+% [thet, phi] = meshgrid(thet, phi);
+% 
+% % define radius
+% r = 1
+% 
+% % convert to cartesian coordinate
+% [x, y, z] = sph2cart(thet, phi, r);
+% 
+% % plot
+% plot(x, y, z);
 
